@@ -12,9 +12,7 @@ function checkI(){
     console.log(i);
 }
 
-if(process.argv[2] && process.argv[2] === 'console') {
-    const replServer = repl.start({
-        prompt: ':) '
-    });
-    replServer.context.checkI = checkI;
-}
+const replServer = repl.start({
+    prompt: ':) '
+});
+replServer.context.checkI = checkI;
