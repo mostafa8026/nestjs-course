@@ -1,2 +1,0 @@
-var message;
-message = 'abc';
