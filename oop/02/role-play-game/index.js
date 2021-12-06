@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const debug_1 = __importDefault(require("debug"));
 const generalLog = (0, debug_1.default)("app:general");
-const speed = 100;
+const speed = 7000;
 class Hero {
     constructor(name) {
         this.name = "";

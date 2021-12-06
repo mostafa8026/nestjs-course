@@ -1,7 +1,7 @@
 import debug from "debug";
 
 const generalLog: debug.Debugger = debug("app:general");
-const speed = 100;
+const speed = 7000;
 
 class Hero {
   name: string = "";
