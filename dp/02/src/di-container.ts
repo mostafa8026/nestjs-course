@@ -1,7 +1,4 @@
-import { DIContainer } from "@wessberg/di";
-
-// Creating a container...
-const container = new DIContainer();
+import { createInjector } from "typed-inject";
 
 interface Driver3 {
   goto(destination: String): void;
@@ -14,8 +11,6 @@ class UberDriver3 implements Driver3 {
   }
 }
 
-container.registerSingleton<Driver3, UberDriver3>();
-
 class Ceo3 {
   constructor(private driver: Driver3) {}
 
@@ -26,8 +21,8 @@ class Ceo3 {
   }
 }
 
-container.registerSingleton<Ceo3>();
+const appInjector = createInjector().provideValue("driver", UberDriver3);
 
 export function diContainer() {
-  const ceo = container.get<Driver3>();
+  const driver = appInjector.resolve("driver");
 }
