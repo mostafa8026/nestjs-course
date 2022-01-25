@@ -1,0 +1,20 @@
+{
+    "type": "mssql",
+    "host": "localhost",
+    "port": 1433,
+    "username": "user",
+    "password": "",
+    "database": "typeorm2",
+    "extra": {
+        "trustServerCertificate": true
+    },
+    "entities": [
+       "dist/**/*.entity.js"
+    ],
+    "migrations": [
+        "dist/migration/*.js"
+    ],
+    "cli": {
+       "migrationsDir": "src/migration"
+    }
+ }
