@@ -1,0 +1,20 @@
+{
+    "type": "mssql",
+    "host": "localhost\\sql2019",
+    "port": 1433,
+    "username": "user1",
+    "password": "123",
+    "database": "typeorm_prod",
+    "extra": {
+        "trustServerCertificate": true
+    },
+    "entities": [
+        "dist/**/*.entity.js"
+    ],
+    "migrations": [
+        "dist/migration/*.js"
+    ],
+    "cli": {
+        "migrationsDir": "src/migration"
+    }
+}
