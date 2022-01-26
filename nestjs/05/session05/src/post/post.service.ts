@@ -1,3 +1,4 @@
+import { ConfigService, ConfigType } from '@nestjs/config';
 import {
   BadRequestException,
   HttpException,
@@ -22,6 +23,8 @@ import { CreatePostDto } from './dtos/create-post.dto';
 import { UpdatePostDto } from './dtos/update-post.dto';
 import { CategoryEntity } from './entities/category.entity';
 import { PostEntity } from './entities/post.entity';
+import { config } from 'process';
+import postConfig from './configs/post.config';
 
 @Injectable()
 export class PostService {
@@ -37,11 +40,14 @@ export class PostService {
     private readonly connection: Connection,
     private readonly eventService: EventService,
     @Inject(CURRENCY_SIGN) private readonly currencySign: string,
+    @Inject(postConfig.KEY)
+    private readonly post: ConfigType<typeof postConfig>,
   ) {
     console.log(`PostService: constructor, mail api is: ${mailApi}`);
     console.log(
       `PostService: constructor, Currency Sign is: ${this.currencySign}`,
     );
+    console.log(`SHOW_MOBILE_NUMBER: ${this.post.showMobileNumber}`);
   }
 
   findAll(pagination?: PaginationDto) {
