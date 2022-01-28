@@ -6,17 +6,20 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
+import { ConfigService, ConfigType } from '@nestjs/config';
 import { InjectRepository } from '@nestjs/typeorm';
 import { query } from 'express';
+import { CURRENCY_SIGN } from 'src/currency/constants/token.constant';
 import { RefTypeEnum } from 'src/enums/ref-type.enum';
 import { EventEntity, EventTypes } from 'src/event/entities/event.entity';
 import { EventService } from 'src/event/event.service';
+import { LoggerService } from 'src/logger/logger.service';
 import {
   Connection,
   QueryRunnerAlreadyReleasedError,
   Repository,
 } from 'typeorm';
-import { CURRENCY_SIGN } from './constants/token.constant';
+import postConfig from './config/post.config';
 import { PaginationDto } from './dto/pagination.dto';
 import { CreatePostDto } from './dtos/create-post.dto';
 import { UpdatePostDto } from './dtos/update-post.dto';
@@ -37,18 +40,26 @@ export class PostService {
     private readonly connection: Connection,
     private readonly eventService: EventService,
     @Inject(CURRENCY_SIGN) private readonly currencySign: string,
+    private readonly loggerService: LoggerService,
+    @Inject(postConfig.KEY)
+    private readonly postconfig: ConfigType<typeof postConfig>,
   ) {
-    console.log(`PostService: constructor, mail api is: ${mailApi}`);
-    console.log(
-      `PostService: constructor, Currency Sign is: ${this.currencySign}`,
+    this.loggerService.setPrefix('PostService');
+    this.loggerService.log(`constructor, mail api is: ${mailApi}`);
+    this.loggerService.log(
+      `constructor, Currency Sign is: ${this.currencySign}`,
+    );
+    this.loggerService.log(
+      `SHOW_MOBILE_NUMBER: ${this.postconfig.showMobileNumber}`,
     );
   }
 
   findAll(pagination?: PaginationDto) {
+    this.loggerService.log('findAll Called');
     return this.postRepository.find({
       relations: ['categories'],
-      skip: pagination.page * pagination.pageCount,
-      take: pagination.pageCount,
+      skip: pagination?.page * pagination?.pageCount,
+      take: pagination?.pageCount,
     });
   }
 
