@@ -8,7 +8,14 @@ import {
   Body,
   Delete,
   Query,
+  UsePipes,
+  ValidationPipe,
+  ParseIntPipe,
+  UseGuards,
+  SetMetadata,
 } from '@nestjs/common';
+import { AppKeyGuard } from 'src/common/guards/app-key.guard';
+import { isPublic } from 'src/common/guards/is-public.decorator';
 import { EventTypes } from 'src/event/entities/event.entity';
 import { PaginationDto } from './dto/pagination.dto';
 import { CreatePostDto } from './dtos/create-post.dto';
@@ -30,6 +37,7 @@ export class PostController {
   }
 
   @Get('/:id')
+  @isPublic()
   findOne(@Param('id') id) {
     return this.postService.findOne(parseInt(id));
   }
@@ -40,8 +48,8 @@ export class PostController {
   }
 
   @Put(':id')
-  update(@Param('id') id, @Body() body: UpdatePostDto) {
-    return this.postService.update(+id, body);
+  update(@Param('id', ParseIntPipe) id: number, @Body() body: UpdatePostDto) {
+    return this.postService.update(id, body);
   }
 
   @Patch(':id')

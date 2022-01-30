@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, ValidationPipe } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -15,6 +15,10 @@ import { TranslateModule } from 'src/translate/translate.module';
 import { TextfieldsModule } from 'src/textfields/textfields.module';
 import postConfig from 'src/post/config/post.config';
 import { UserService } from 'src/user/user.service';
+import { APP_FILTER, APP_GUARD, APP_PIPE } from '@nestjs/core';
+import { LogExceptionFilter } from 'src/common/filters/log-exception.filter';
+import { AppKeyGuard } from 'src/common/guards/app-key.guard';
+import { AppKeyModule } from 'src/app-key/app-key.module';
 
 @Module({
   imports: [
@@ -24,6 +28,8 @@ import { UserService } from 'src/user/user.service';
         HOST: Joi.string().required(),
         PORT: Joi.number().required(),
         USER_NAME: Joi.string().default('user1'),
+        VALIDATION_WHITE_LIST: Joi.boolean(),
+        FORBIDDEN_NON_WHITE_LISTED: Joi.boolean(),
       }),
     }),
     TypeOrmModule.forRootAsync({
@@ -48,8 +54,36 @@ import { UserService } from 'src/user/user.service';
     LoggerModule,
     TranslateModule,
     TextfieldsModule,
+    PostModule,
+    AppKeyModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_FILTER,
+      useClass: LogExceptionFilter,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: AppKeyGuard,
+    },
+    // {
+    //   provide: APP_PIPE,
+    //   inject: [ConfigService],
+    //   useFactory: (configService: ConfigService) => {
+    //     console.log(
+    //       'ValidationPipe',
+    //       typeof configService.get<Boolean>('VALIDATION_WHITE_LIST'),
+    //     );
+    //     return new ValidationPipe({
+    //       whitelist: configService.get<boolean>('VALIDATION_WHITE_LIST'),
+    //       forbidNonWhitelisted: configService.get<boolean>(
+    //         'FORBIDDEN_NON_WHITE_LISTED',
+    //       ),
+    //     });
+    //   },
+    // },
+  ],
 })
 export class AppModule {}

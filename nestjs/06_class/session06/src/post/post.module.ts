@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { AppKeyModule } from 'src/app-key/app-key.module';
 import { CurrencyModule } from 'src/currency/currency.module';
 import { EventEntity } from 'src/event/entities/event.entity';
 import { EventModule } from 'src/event/event.module';
@@ -20,6 +21,7 @@ import { PostService } from './post.service';
     EventModule,
     UtilityModule,
     LoggerModule,
+    AppKeyModule,
   ],
   controllers: [PostController],
   providers: [
