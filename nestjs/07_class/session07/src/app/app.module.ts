@@ -15,10 +15,12 @@ import { TranslateModule } from 'src/translate/translate.module';
 import { TextfieldsModule } from 'src/textfields/textfields.module';
 import postConfig from 'src/post/config/post.config';
 import { UserService } from 'src/user/user.service';
-import { APP_FILTER, APP_GUARD, APP_PIPE } from '@nestjs/core';
+import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 import { LogExceptionFilter } from 'src/common/filters/log-exception.filter';
 import { AppKeyGuard } from 'src/common/guards/app-key.guard';
 import { AppKeyModule } from 'src/app-key/app-key.module';
+import { TimeoutInterceptor } from 'src/common/interceptors/timeout.interceptor';
+import { NotifyModule } from 'src/notify/notify.module';
 
 @Module({
   imports: [
@@ -30,6 +32,7 @@ import { AppKeyModule } from 'src/app-key/app-key.module';
         USER_NAME: Joi.string().default('user1'),
         VALIDATION_WHITE_LIST: Joi.boolean(),
         FORBIDDEN_NON_WHITE_LISTED: Joi.boolean(),
+        TIMEOUT: Joi.number(),
       }),
     }),
     TypeOrmModule.forRootAsync({
@@ -56,6 +59,7 @@ import { AppKeyModule } from 'src/app-key/app-key.module';
     TextfieldsModule,
     PostModule,
     AppKeyModule,
+    NotifyModule,
   ],
   controllers: [AppController],
   providers: [
@@ -67,6 +71,10 @@ import { AppKeyModule } from 'src/app-key/app-key.module';
     {
       provide: APP_GUARD,
       useClass: AppKeyGuard,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: TimeoutInterceptor,
     },
     // {
     //   provide: APP_PIPE,

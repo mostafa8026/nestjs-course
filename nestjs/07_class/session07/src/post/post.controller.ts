@@ -38,7 +38,12 @@ export class PostController {
 
   @Get('/:id')
   @isPublic()
-  findOne(@Param('id') id) {
+  async findOne(@Param('id') id) {
+    // await new Promise((resolve) => {
+    //   setTimeout(() => {
+    //     resolve(null);
+    //   }, 5000);
+    // });
     return this.postService.findOne(parseInt(id));
   }
 
