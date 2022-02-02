@@ -1,3 +1,4 @@
+import { classToPlain, instanceToPlain } from 'class-transformer';
 import {
   CallHandler,
   ExecutionContext,
@@ -12,7 +13,7 @@ export class WrapperResponseInterceptor implements NestInterceptor {
     console.log(`Start interceptr`);
     return next.handle().pipe(
       map((data) => {
-        return { data };
+        return { data: instanceToPlain(data) };
       }),
     );
   }

@@ -1,3 +1,4 @@
+import { hashSync, compare } from 'bcrypt';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { Console } from 'console';
@@ -74,5 +75,30 @@ async function testRXJS() {
     });
 }
 
+let hashSaltRounds = 10;
+
+export function hashPassword(password: string) {
+  return hashSync(password, hashSaltRounds);
+}
+
+export function comparePassword(password: string, hashPassword: string) {
+  return compare(password, hashPassword);
+}
+
+async function testBCrypt() {
+  console.time('hash time');
+  hashSaltRounds = 18;
+
+  let hash1 = hashPassword('123123');
+  let hash2 = hashPassword('123123');
+  console.log('hash1: ', hash1);
+  console.log('hash2: ', hash2);
+
+  console.log(await compare('123123', hash1));
+  console.log(await compare('123123', hash2));
+  console.timeEnd('hash time');
+}
+
 bootstrap();
 //testRXJS();
+//testBCrypt();

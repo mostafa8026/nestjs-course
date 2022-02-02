@@ -103,11 +103,9 @@ import { ReqResDurationMiddleware } from 'src/common/middlewares/req-res-duratio
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(ReqResDurationMiddleware)
-      .forRoutes({
-        method: RequestMethod.POST,
-        path: '*',
-      });
+    consumer.apply(ReqResDurationMiddleware).forRoutes({
+      method: RequestMethod.POST,
+      path: '*',
+    });
   }
 }

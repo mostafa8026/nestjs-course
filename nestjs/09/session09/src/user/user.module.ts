@@ -1,3 +1,6 @@
+import { StrategiesModule } from './../strategies/strategies.module';
+import { AuthModule } from './../auth/auth.module';
+import { UtilityModule } from 'src/utility/utility.module';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CurrencyModule } from 'src/currency/currency.module';
@@ -11,8 +14,11 @@ import { UserService } from './user.service';
     TypeOrmModule.forFeature([UserEntity]),
     CurrencyModule.forRoot(false),
     LoggerModule,
+    UtilityModule,
+    StrategiesModule,
   ],
   controllers: [UserController],
   providers: [UserService],
+  exports: [UserService],
 })
 export class UserModule {}
