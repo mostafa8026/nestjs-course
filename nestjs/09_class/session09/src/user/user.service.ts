@@ -1,15 +1,31 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 import { LoggerService } from 'src/logger/logger.service';
+import { UserRepository } from 'src/repositories/user-repository.repository';
+import { UtilityService } from 'src/utility/utility.service';
+import { Repository } from 'typeorm';
+import { CreateUserDto } from './dtos/create-user.dto';
+import { UserEntity } from './entities/user.entity';
 
 @Injectable()
 export class UserService {
-  constructor(private readonly loggerService: LoggerService) {
+  constructor(
+    private readonly loggerService: LoggerService,
+    @InjectRepository(UserEntity)
+    private readonly userRepository: UserRepository,
+    private readonly utilityService: UtilityService,
+  ) {
     this.loggerService.setPrefix('UserService');
     this.loggerService.log('Constructor called');
   }
 
   findAll() {
-    this.loggerService.log('findAll');
-    return 'user find all';
+    return this.userRepository.find();
+  }
+
+  create(data: CreateUserDto) {
+    data.password = this.utilityService.hash(data.password);
+    const user = this.userRepository.create(data);
+    return this.userRepository.save(user);
   }
 }
