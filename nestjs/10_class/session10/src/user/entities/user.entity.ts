@@ -1,7 +1,15 @@
 import { Exclude } from 'class-transformer';
 import { EventEntity } from 'src/event/entities/event.entity';
 import { PostEntity } from 'src/post/entities/post.entity';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { RoleEntity } from 'src/role/entities/role.entity';
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity('user')
 export class UserEntity {
@@ -28,4 +36,10 @@ export class UserEntity {
 
   @Column()
   createdAt: Date = new Date();
+
+  @ManyToMany(() => RoleEntity, (role) => role.users, {
+    eager: true,
+  })
+  @JoinTable()
+  roles: RoleEntity[];
 }

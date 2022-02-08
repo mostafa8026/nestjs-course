@@ -13,4 +13,11 @@ export class UserSecurityService {
   findByUsername(username: string) {
     return this.userRepository.findOne({ username });
   }
+
+  findById(id: number) {
+    return this.userRepository.findOne({
+      where: { id },
+      relations: ['roles'],
+    });
+  }
 }

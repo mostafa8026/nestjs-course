@@ -1,6 +1,8 @@
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { Console } from 'console';
+import * as session from 'express-session';
+import * as passport from 'passport';
 import {
   catchError,
   delay,
@@ -18,10 +20,24 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalInterceptors(new WrapperResponseInterceptor());
 
+  // app.use(
+  //   session({
+  //     secret: 'OUR SECRET KEY',
+  //     resave: false,
+  //     saveUninitialized: false,
+  //     cookie: {
+  //       maxAge: 600000,
+  //     },
+  //   }),
+  // );
+  // app.use(passport.initialize());
+  // app.use(passport.session());
+
   const options = new DocumentBuilder()
     .setTitle('Our Api Specification')
     .setVersion('1.0.0')
     .setDescription('Our Api Description')
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, options);

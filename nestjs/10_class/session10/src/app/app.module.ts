@@ -28,6 +28,7 @@ import { AppKeyModule } from 'src/app-key/app-key.module';
 import { TimeoutInterceptor } from 'src/common/interceptors/timeout.interceptor';
 import { NotifyModule } from 'src/notify/notify.module';
 import { ReqResDurationMiddleware } from 'src/common/middlewares/req-res-duration.middleware';
+import { RoleModule } from 'src/role/role.module';
 
 @Module({
   imports: [
@@ -67,6 +68,7 @@ import { ReqResDurationMiddleware } from 'src/common/middlewares/req-res-duratio
     PostModule,
     AppKeyModule,
     NotifyModule,
+    RoleModule,
   ],
   controllers: [AppController],
   providers: [
@@ -87,10 +89,6 @@ import { ReqResDurationMiddleware } from 'src/common/middlewares/req-res-duratio
     //   provide: APP_PIPE,
     //   inject: [ConfigService],
     //   useFactory: (configService: ConfigService) => {
-    //     console.log(
-    //       'ValidationPipe',
-    //       typeof configService.get<Boolean>('VALIDATION_WHITE_LIST'),
-    //     );
     //     return new ValidationPipe({
     //       whitelist: configService.get<boolean>('VALIDATION_WHITE_LIST'),
     //       forbidNonWhitelisted: configService.get<boolean>(
@@ -103,11 +101,9 @@ import { ReqResDurationMiddleware } from 'src/common/middlewares/req-res-duratio
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(ReqResDurationMiddleware)
-      .forRoutes({
-        method: RequestMethod.POST,
-        path: '*',
-      });
+    consumer.apply(ReqResDurationMiddleware).forRoutes({
+      method: RequestMethod.POST,
+      path: '*',
+    });
   }
 }

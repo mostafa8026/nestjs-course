@@ -13,6 +13,7 @@ export class WrapperResponseInterceptor implements NestInterceptor {
     console.log(`Start interceptr`);
     return next.handle().pipe(
       map((data) => {
+        console.log('wrapper map');
         return { data: instanceToPlain(data) };
       }),
     );
