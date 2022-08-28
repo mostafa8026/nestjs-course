@@ -1,10 +1,15 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Scope } from '@nestjs/common';
 import { CreatePostDto } from './dto/create-post.dto';
 import { PostEntity } from './entities/post.entity';
 import { UpdatePostDto } from './dto/update-post.dto';
 
 @Injectable()
 export class PostService {
+
+    constructor(){
+        console.log('Post service Initializing ...');
+    }
+
     insert(post: CreatePostDto): PostEntity {
         // insert
         const postEntity = new PostEntity();
