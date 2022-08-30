@@ -2,21 +2,22 @@ import { Injectable, Scope } from '@nestjs/common';
 import { CreatePostDto } from './dto/create-post.dto';
 import { PostEntity } from './entities/post.entity';
 import { UpdatePostDto } from './dto/update-post.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class PostService {
 
-    constructor(){
+    constructor(@InjectRepository(PostEntity) private postRepository: Repository<PostEntity>){
         console.log('Post service Initializing ...');
     }
 
-    insert(post: CreatePostDto): PostEntity {
-        // insert
+    async insert(post: CreatePostDto): Promise<PostEntity> {
         const postEntity = new PostEntity();
-        postEntity.id = post.id;
         postEntity.name = post.name;
+        const dbPostEntity = await this.postRepository.save(postEntity);
 
-        return postEntity;
+        return dbPostEntity;
     }
 
     update(body: UpdatePostDto) {

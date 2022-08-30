@@ -11,8 +11,10 @@ export class PostController {
     }
 
     @Post()
-    insert(@Body() body: CreatePostDto): PostEntity {
-        console.log(body);
+    async insert(@Body() body: CreatePostDto): Promise<PostEntity> {
+        console.log(body instanceof CreatePostDto)
+        //console.log(body);
+        body.printMe();
         return this.postService.insert(body);
     }
 
