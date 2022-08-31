@@ -1,0 +1,20 @@
+{
+    "type": "mssql",
+    "host": "localhost",
+    "port": 1433,
+    "username": "sa",
+    "password": "123@456dD",
+    "database": "nestjs",
+    "extra": {
+        "trustServerCertificate": true
+    },
+    "entities": [
+       "dist/**/*.entity.js"
+    ],
+    "migrations": [
+        "dist/migration/*.js"
+    ],
+    "cli": {
+       "migrationsDir": "src/migration"
+    }
+ }
