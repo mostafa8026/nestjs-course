@@ -3,6 +3,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PostModule } from './post/post.module';
+import { UserModule } from './user/user.module';
+import { UtilsModule } from './utils/utils.module';
 
 @Module({
   imports: [
@@ -18,7 +20,7 @@ import { PostModule } from './post/post.module';
       extra: {
         encrypt: false
       }
-  })
+  }), UserModule, UtilsModule
 ],
   controllers: [AppController],
   providers: [AppService],

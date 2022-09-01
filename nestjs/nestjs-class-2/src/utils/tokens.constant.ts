@@ -1,0 +1,1 @@
+export const IP_URL = 'IP_URL';

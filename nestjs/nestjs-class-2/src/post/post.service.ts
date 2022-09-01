@@ -4,12 +4,17 @@ import { PostEntity } from './entities/post.entity';
 import { UpdatePostDto } from './dto/update-post.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { PostRepository } from './repositories/post.repository';
 
 @Injectable()
 export class PostService {
 
-    constructor(@InjectRepository(PostEntity) private postRepository: Repository<PostEntity>){
+    constructor(private postRepository: PostRepository){
         console.log('Post service Initializing ...');
+    }
+
+    async findByName(name: string) {
+        return this.postRepository.findByName(name);
     }
 
     async insert(post: CreatePostDto): Promise<PostEntity> {

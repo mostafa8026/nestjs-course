@@ -1,5 +1,6 @@
 import { IsNumber, IsString, MaxLength } from 'class-validator';
-import { Column, Entity, PrimaryGeneratedColumn, Table } from 'typeorm';
+import { UserEntity } from 'src/user/entities/user.entity';
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn, Table } from 'typeorm';
 
 @Entity('Post')
 export class PostEntity {
@@ -11,4 +12,7 @@ export class PostEntity {
     @MaxLength(10)
     @Column()
     name: string;
+
+    @ManyToMany(()=>UserEntity, u=>u.posts)
+    users: UserEntity[];
 }
