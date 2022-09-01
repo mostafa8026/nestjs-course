@@ -10,7 +10,7 @@ import { UtilsModule } from 'src/utils/utils.module';
 
 
 @Module({
-  imports: [TypeOrmModule.forFeature([UserRepository]), PostModule, UtilsModule],
+  imports: [TypeOrmModule.forFeature([UserRepository]), PostModule, UtilsModule.register('https://ifconfig.ovh')],
   controllers: [UserController],
   providers: [UserService]
 })

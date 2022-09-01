@@ -5,6 +5,7 @@ import { AppService } from './app.service';
 import { PostModule } from './post/post.module';
 import { UserModule } from './user/user.module';
 import { UtilsModule } from './utils/utils.module';
+import { ConfigurationModule } from './configuration/configuration.module';
 
 @Module({
   imports: [
@@ -20,7 +21,7 @@ import { UtilsModule } from './utils/utils.module';
       extra: {
         encrypt: false
       }
-  }), UserModule, UtilsModule
+  }), UserModule, UtilsModule, ConfigurationModule
 ],
   controllers: [AppController],
   providers: [AppService],

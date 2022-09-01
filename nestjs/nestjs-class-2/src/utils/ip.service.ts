@@ -9,6 +9,7 @@ export class IPService {
     }
 
     async getIP() {
+        console.log(this.ipUrl)
         return await got.get(this.ipUrl);
     }
 }
