@@ -1,15 +1,20 @@
 import { Inject, Injectable } from "@nestjs/common";
-import { IP_URL } from "./tokens.constant";
+import { UTIL_MODULE_CONFIG_OPTIONS } from "./tokens.constant";
 import got from 'got'
+import { UtilModuleConfigOptions } from "./ip-async-options.interface";
 
 @Injectable()
 export class IPService {
 
-    constructor(@Inject(IP_URL) private ipUrl: string){
+    constructor(
+        @Inject(UTIL_MODULE_CONFIG_OPTIONS)
+        private utilModuleConfigOptions: UtilModuleConfigOptions
+    ) {
+        console.log(this.utilModuleConfigOptions);
     }
 
     async getIP() {
-        console.log(this.ipUrl)
-        return await got.get(this.ipUrl);
+        console.log(this.utilModuleConfigOptions)
+        return await got.get(this.utilModuleConfigOptions.ipUrl);
     }
 }

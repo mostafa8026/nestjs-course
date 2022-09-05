@@ -1,1 +1,1 @@
-export const IP_URL = 'IP_URL';
+export const UTIL_MODULE_CONFIG_OPTIONS = 'IP_URL';
