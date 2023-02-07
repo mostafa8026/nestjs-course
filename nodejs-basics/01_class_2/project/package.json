@@ -1,0 +1,17 @@
+{
+  "name": "project",
+  "version": "1.0.0",
+  "description": "the project",
+  "main": "index.js",
+  "scripts": {
+    "prestart": "rm dist/ -rf",
+    "start": "node index.js",
+    "start:dev": "npm run prestart && nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
