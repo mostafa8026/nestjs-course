@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Global, Module, ValidationPipe } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -9,10 +9,12 @@ import { ConfigurationModule } from './configuration/configuration.module';
 import { ConfigModule, ConfigType } from '@nestjs/config';
 import { appConfig } from './app.config';
 import typeormConfig from './typeorm.config';
+import { APP_PIPE } from '@nestjs/core';
+import { ValidationError } from 'class-validator';
 
 @Module({
   imports: [
-    PostModule, 
+    PostModule,
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule.forFeature(typeormConfig)],
       inject: [typeormConfig.KEY],
@@ -28,13 +30,23 @@ import typeormConfig from './typeorm.config';
           extra: {
             encrypt: false
           }
+        }
       }
-    }
-  }), UserModule, UtilsModule, ConfigurationModule,
-  ConfigModule.forRoot(),
-  ConfigModule.forFeature(appConfig)
-],
+    }), UserModule, UtilsModule, ConfigurationModule,
+    ConfigModule.forRoot(),
+    ConfigModule.forFeature(appConfig)
+  ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    // {
+    //   provide: APP_PIPE,
+    //   useValue: new ValidationPipe({
+    //             whitelist: true,
+    //             forbidNonWhitelisted: true,
+    //             transform: true,
+    //         })
+    // }
+  ],
 })
-export class AppModule {}
+export class AppModule { }
