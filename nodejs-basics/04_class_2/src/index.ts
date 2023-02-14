@@ -5,6 +5,9 @@ import { HalfbackPlayer } from "./Halfback-player";
 import { PlayerInterface } from "./player-interface";
 import { Team } from "./team";
 
+/**
+ * Run the game
+ */
 async function run() {
 
     const playersHome: PlayerInterface[] = [];
@@ -22,16 +25,26 @@ async function run() {
     const homeTeam = new Team('Home Team', playersHome);
     const awayTeam = new Team('Away Team', playersAway);
 
+    /**
+     * Create a new field
+     */
     const field = new FootbalField(
         'The Great Match',
         homeTeam,
-        awayTeam
+        awayTeam,
+        /**
+         * Set the time of the game in seconds
+         */
+        10 // seconds
     );
 
     field.startGame();
 
+    /**
+     * Simulate the game
+     */
     while (!field.isEnd()) {
-        await delay(100);
+        await delay(1000);
         const rand = Math.floor(Math.random() * 6);
         if(rand >= 3) {
             homeTeam.Goal();
@@ -40,6 +53,9 @@ async function run() {
         }
     }
 
+    /**
+     * End the game
+     */
     field.endGame();
 }
 

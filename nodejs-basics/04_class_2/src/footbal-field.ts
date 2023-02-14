@@ -2,15 +2,16 @@ import { Team } from "./team";
 
 export class FootbalField {
     name: string;
-    time: number = 5;
+    time: number;
     handler: NodeJS.Timer | undefined;
     homeTeam: Team;
     awayTeam: Team;
 
-    constructor(name: string, homeTeam: Team, awayTeam: Team) {
+    constructor(name: string, homeTeam: Team, awayTeam: Team, time: number = 90) {
         this.name = name;
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
+        this.time = time;
     }
 
     startGame() {
@@ -19,7 +20,6 @@ export class FootbalField {
             this.time--;
             console.log(this.time);
         }, 1000);
-        console.log('handler', this.handler);
     }
 
     isEnd(): boolean | string {
