@@ -1,4 +1,4 @@
-import { delay } from "../utils/delay";
+import { delay } from "./utils/delay";
 import { DefensePlayer } from "./defense-player";
 import { FootbalField } from "./footbal-field";
 import { HalfbackPlayer } from "./Halfback-player";
