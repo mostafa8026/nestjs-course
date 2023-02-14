@@ -3,7 +3,7 @@ import { Team } from "./team";
 export class FootbalField {
     name: string;
     time: number = 5;
-    handler: number = 0;
+    handler: NodeJS.Timer | undefined;
     homeTeam: Team;
     awayTeam: Team;
 
