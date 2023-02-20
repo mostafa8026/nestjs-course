@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node dist/app.js",
     "dev": "nodemon --watch src --exec ts-node src/app.ts",
     "build": "rm dist -rf && tsc && cp -R src/public dist/public"
   },
