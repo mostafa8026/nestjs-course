@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Football Field</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="field">
+      <div class="team team-1">
+        <% for (var i = 0; i < players.length; i++) { %>
+          <div class="player" style="top:<%= players[i].y %>px; left:<%= players[i].x %>px;">
+            <div class="player-number"><%= players[i].number %></div>
+            <div class="player-name"><%= players[i].name %></div>
+          </div>
+        <% } %>
+      </div>
+      <!-- <div class="team team-2">
+        <% for (var i = 0; i < players.length; i++) { %>
+          <div class="player" style="top:<%= players[i].y %>px; left:<%= players[i].x %>px;">
+            <div class="player-number"><%= players[i].number %></div>
+            <div class="player-name"><%= players[i].name %></div>
+          </div>
+        <% } %>
+      </div> -->
+    </div>
+  </body>
+</html>

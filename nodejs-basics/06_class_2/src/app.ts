@@ -5,16 +5,39 @@ import path from 'path';
 import { Events } from './models/events.model';
 import { BaseRepository } from './models/base.repository';
 import { EventsInterface } from './interfaces/events.interface';
+import { generateRandomPositions } from './utils/get-playes';
 
 const app = express();
 
+/**
+ * To use ejs you should first install it by setting the view engine of express to ejs
+ */
+app.set('view engine', 'ejs');
+/**
+ * Then you should set the views folder to the path of the views folder
+ */
+app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
-const eventsRepository = new BaseRepository<EventsInterface>('events');
-
 app.use(express.json());
 
+const eventsRepository = new BaseRepository<EventsInterface>('events');
+
 app.get('/', (req: express.Request, res: express.Response) => {
-  res.send('Hello World');
+  //res.send('Hello World');
+  res.render('index');
+});
+
+app.get('/football', (req: express.Request, res: express.Response) => {
+  //res.send('Hello World');
+  res.render('football', {
+    players: generateRandomPositions([
+      { name: "A", number: "1" },
+      { name: "B", number: "2" },
+      { name: "C", number: "3" },
+      { name: "D", number: "4" },
+      { name: "E", number: "5" },
+    ], 800, 400, 50, 50)
+  });
 });
 
 // Get all events
@@ -75,5 +98,5 @@ app.delete('/events/:id', async (req: Request, res: Response) => {
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+  console.log(`Server is running on port http://localhost:${port}`);
 });
