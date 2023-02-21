@@ -10,7 +10,7 @@ export class BaseRepository<T extends { id?: number }> {
   private readonly dbFolder: string;
 
   constructor(private readonly tableName: string) {
-    this.dbFolder = path.join(__dirname, 'db');
+    this.dbFolder = './db';
     this.tableName = tableName;
     this.filePath = path.join(this.dbFolder, `${tableName}.json`);
     this.initializeDbFile();

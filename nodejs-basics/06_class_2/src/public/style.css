@@ -2,9 +2,11 @@
   justify-content: center;
   background-color: #339933;
   background-image: linear-gradient(#336633, #339933);
-  width: 100%; /* Set the field width to 100% of its parent container */
+  width: 100%;
+  /* Set the field width to 100% of its parent container */
   height: 800px;
-  margin: 0 auto; /* Center the field horizontally using auto margins */
+  margin: 0 auto;
+  /* Center the field horizontally using auto margins */
   position: relative;
 }
 
