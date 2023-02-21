@@ -1,4 +1,5 @@
 import { promises as fs } from 'fs';
+import path from 'path'
 
 /**
  * T is the type of the interface
@@ -9,9 +10,9 @@ export class BaseRepository<T extends { id?: number }> {
   private readonly dbFolder: string;
 
   constructor(private readonly tableName: string) {
-    this.dbFolder = './db';
-    this.filePath = `${this.dbFolder}/${tableName}.json`;
+    this.dbFolder = path.join(__dirname, 'db');
     this.tableName = tableName;
+    this.filePath = path.join(this.dbFolder, `${tableName}.json`);
     this.initializeDbFile();
   }
 
