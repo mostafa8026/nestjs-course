@@ -1,5 +1,5 @@
 import { factory } from "./factory";
-import { observer } from "./observer";
+import { observer } from "./observer/simple-observer";
 import { proxy } from "./proxy";
 import { singleton } from "./singleton";
 
