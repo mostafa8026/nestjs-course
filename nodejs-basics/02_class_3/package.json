@@ -1,0 +1,19 @@
+{
+  "name": "02_class_3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "got": "^11.8.6"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.5"
+  }
+}
