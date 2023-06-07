@@ -1,0 +1,13 @@
+## get users
+GET http://localhost:3000/user
+
+### get by id
+GET http://localhost:3000/user/1
+
+### patch id
+PATCH http://localhost:3000/user/username/1
+Content-Type: application/json
+
+{
+  "username": "some new username"
+}
