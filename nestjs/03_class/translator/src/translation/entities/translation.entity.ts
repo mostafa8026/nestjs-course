@@ -1,5 +1,5 @@
+import { OmitType, PartialType, PickType } from "@nestjs/mapped-types";
 import { IsDate, IsString } from "class-validator";
-import { OmitType, PartialType } from "@nestjs/mapped-types";
 
 export type Languages = 'en' | 'fa';
 export class TranslationEntity {
@@ -30,3 +30,17 @@ export class TranslationUpdateDTO
   extends PartialType(OmitType(TranslationEntity
     , ['createdAt'] as const)) {
 }
+
+const a = {
+  red: 'red1',
+  blue: 5
+} as const;
+
+type t = typeof a[keyof typeof a]
+
+export class DeleteTranslationDTO 
+  extends PickType(
+    TranslationEntity, ['id'] as const
+    ) {
+    
+  }

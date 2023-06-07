@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import * as md5 from 'md5';
 import { JsonStorageService } from 'src/db/json-storage.service';
-import { TranslationEntity, TranslationUpdateDTO } from './entities/translation.entity';
+import { DeleteTranslationDTO, TranslationEntity, TranslationUpdateDTO } from './entities/translation.entity';
 import { PaginationResult } from 'src/shared/pagination-query.dto';
 
 @Injectable()
@@ -28,6 +28,10 @@ export class TranslationService {
 
   update(translation: TranslationUpdateDTO) {
     return this.jsonStorageService.updateById('translation', translation.id, translation)
+  }
+
+  delete(translation: DeleteTranslationDTO) {
+    return this.jsonStorageService.deleteById('translation', translation.id);
   }
 
 }

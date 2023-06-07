@@ -48,7 +48,6 @@ export class JsonStorageService {
     const text = fs.readFileSync(this.dbPath, {
       encoding: 'utf-8'
     });
-    console.log('text', text);
     const json = JSON.parse(text);
     json[resource].push(data);
     fs.writeFileSync(this.dbPath, JSON.stringify(json));

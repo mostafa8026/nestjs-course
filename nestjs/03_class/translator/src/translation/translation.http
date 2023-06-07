@@ -20,6 +20,7 @@ Content-Type: application/json
 {
     "phrase": "کتاب",
     "translation": "book",
-    "fromLang": 123,
-    "toLang": "en"
+    "fromLang": "fa",
+    "toLang": "en",
+    "newField": "fff"
 }
