@@ -1,0 +1,17 @@
+### login
+POST http://localhost:2000/login
+Content-Type: application/json
+
+{
+    "username": "admin",
+    "password": "admin"
+}
+
+### dump session
+GET http://localhost:2000/session-dump
+
+### get profile
+GET http://localhost:2000/profile
+
+### log out
+POST http://localhost:2000/logout
