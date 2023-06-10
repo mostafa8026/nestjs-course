@@ -4,19 +4,16 @@ import { TranslationEntity } from './translation.entity';
 import { UserEntity } from './user.entity';
 
 const datasource = new DataSource({
-  type: 'mssql',
+  type: 'postgres',
   host: 'localhost',
-  port: 1433,
+  port: 5432,
   database: 'translation',
-  username: 'sa',
-  password: '123@456dD',
+  username: 'postgres',
+  password: 'postgres',
   synchronize: true,
   entities: [TranslationEntity, MetaDataEntity,
     UserEntity],
   logging: true,
-  options: {
-    encrypt: false
-  }
 })
 
 datasource.initialize().then(() => {

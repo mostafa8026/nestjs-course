@@ -1,4 +1,4 @@
-import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
 import { TranslationEntity } from "./translation.entity";
 
 @Entity('user')
@@ -12,7 +12,7 @@ export class UserEntity {
   @JoinTable()
   @ManyToMany(
     () => TranslationEntity,
-    (translation) => translation.id
+    (translation) => translation.users,
   )
   translations: TranslationEntity[];
 

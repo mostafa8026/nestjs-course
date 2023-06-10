@@ -11,8 +11,7 @@ export class MetaDataEntity {
 
   @JoinColumn()
   @OneToOne(
-    (_) => TranslationEntity,
-    (translation) => translation.id
+    () => TranslationEntity
   )
-  translationId: number;
+  translation: TranslationEntity;
 }

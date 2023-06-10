@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import { UserEntity } from "./user.entity";
 
 @Entity('translation')
 export class TranslationEntity {
@@ -15,4 +16,7 @@ export class TranslationEntity {
 
   @CreateDateColumn()
   createdAt: Date;
+
+  @ManyToMany(()=>UserEntity, (user)=>user.translations)
+  users: UserEntity[];
 }
