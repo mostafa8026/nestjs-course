@@ -1,0 +1,26 @@
+### get paginated
+GET  http://localhost:3000/translation?page=1&limit=10
+
+
+### post translation
+POST http://localhost:3000/translation
+Content-Type: application/json
+
+{
+    "phrase": "کتاب",
+    "translation": "book",
+    "fromLang": "fa",
+    "toLang": "en"
+}
+
+### put translation
+PUT http://localhost:3000/translation
+Content-Type: application/json
+
+{
+    "phrase": "کتاب",
+    "translation": "book",
+    "fromLang": "fa",
+    "toLang": "en",
+    "newField": "fff"
+}
