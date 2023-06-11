@@ -1,0 +1,8 @@
+### POST event (like)
+POST http://localhost:3000/event/like
+Content-Type: application/json
+
+{
+    "userId": 10002,
+    "translationId": "10001"
+}

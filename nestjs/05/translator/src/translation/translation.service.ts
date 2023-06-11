@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import * as md5 from 'md5';
 import { JsonStorageService } from 'src/db/json-storage.service';
 import { PaginationResult } from 'src/shared/pagination-query.dto';
-import { Repository } from 'typeorm';
+import { DataSource, Repository } from 'typeorm';
 import {
   DeleteTranslationDTO,
   TranslationEntity,
@@ -17,6 +17,7 @@ export class TranslationService {
     private jsonStorageService: JsonStorageService,
     @InjectRepository(TranslationEntity)
     private translationRepository: Repository<TranslationEntity>,
+    private datasource: DataSource,
   ) {
     console.log('TranslationService instantiated');
   }
@@ -34,8 +35,8 @@ export class TranslationService {
 
   async insert(translation: TranslationInsertDTO) {
     const toBeInsertedTransation = await this.translationRepository.preload({
-      ...translation
-    })
+      ...translation,
+    });
     toBeInsertedTransation.id = md5(translation.phrase);
     // translation.createdAt = new Date();
     // return this.jsonStorageService.save('translation', translation);

@@ -1,11 +1,14 @@
 import { OmitType, PartialType, PickType } from '@nestjs/mapped-types';
 import { IsDate, IsOptional, IsString } from 'class-validator';
+import { EventEntity } from 'src/event/entities/event.entity';
 import { UserEntity } from 'src/users/entities/user.entity';
 import {
+  BaseEntity,
   Column,
   CreateDateColumn,
   Entity,
   ManyToMany,
+  OneToMany,
   PrimaryColumn,
 } from 'typeorm';
 
@@ -22,7 +25,7 @@ export class TranslationEntity {
 
   @IsString()
   @Column()
-  translation: string;
+  translationText: string;
 
   @IsString()
   @Column({
@@ -44,6 +47,16 @@ export class TranslationEntity {
   @ManyToMany(() => UserEntity, (user) => user.translations)
   @IsOptional()
   users?: UserEntity[];
+
+  @OneToMany(() => EventEntity, (event) => event.translation)
+  @IsOptional()
+  events?: EventEntity[];
+
+  @Column({
+    default: 0,
+  })
+  @IsOptional()
+  likeCount?: number;
 }
 
 export class TranslationInsertDTO extends OmitType(TranslationEntity, [

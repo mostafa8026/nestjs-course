@@ -8,22 +8,27 @@ import { TranslationController } from './translation/tranlation.controller';
 import { TranslationService } from './translation/translation.service';
 import { UserEntity } from './users/entities/user.entity';
 import { UsersController } from './users/users.controller';
+import { EventController } from './event/event.controller';
+import { EventService } from './event/event.service';
+import ds from 'datasource';
+import { EventEntity } from './event/entities/event.entity';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      database: 'translation',
-      username: 'postgres',
-      password: 'postgres',
+      ...ds.options,
+      autoLoadEntities: true,
+      logging: true,
       synchronize: true,
-      entities: [TranslationEntity, UserEntity],
     }),
-    TypeOrmModule.forFeature([TranslationEntity, UserEntity]),
+    TypeOrmModule.forFeature([TranslationEntity, UserEntity, EventEntity]),
   ],
-  controllers: [AppController, UsersController, TranslationController],
-  providers: [AppService, TranslationService, JsonStorageService],
+  controllers: [
+    AppController,
+    UsersController,
+    TranslationController,
+    EventController,
+  ],
+  providers: [AppService, TranslationService, JsonStorageService, EventService],
 })
 export class AppModule {}
