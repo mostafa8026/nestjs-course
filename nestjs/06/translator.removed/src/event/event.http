@@ -1,8 +1,0 @@
-### Like
-POST http://localhost:3000/event/like
-Content-Type: application/json
-
-{
-  "translationId": "",
-  "userId": ""
-}
