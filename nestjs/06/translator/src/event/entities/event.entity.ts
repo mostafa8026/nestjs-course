@@ -1,8 +1,13 @@
-import { IsOptional } from "class-validator";
-import { TranslationEntity } from "src/translation/entities/translation.entity";
-import { UserEntity } from "src/users/entities/user.entity";
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn } from "typeorm";
-
+import { IsOptional } from 'class-validator';
+import { TranslationEntity } from '../../translation/entities/translation.entity';
+import { UserEntity } from '../../users/entities/user.entity';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 export enum EventTypeEnum {
   LIKE = 'LIKE',
@@ -10,8 +15,7 @@ export enum EventTypeEnum {
 }
 
 @Entity('event')
-export class EventEntity{
-
+export class EventEntity {
   constructor(input: Partial<EventEntity>) {
     Object.assign(this, input);
   }
@@ -22,10 +26,10 @@ export class EventEntity{
   @Column()
   type: EventTypeEnum;
 
-  @ManyToOne(()=>UserEntity, (user)=>user.events)
+  @ManyToOne(() => UserEntity, (user) => user.events)
   user: UserEntity;
 
-  @ManyToOne(()=>TranslationEntity, (translation) => translation.events)
+  @ManyToOne(() => TranslationEntity, (translation) => translation.events)
   translation: TranslationEntity;
 
   @CreateDateColumn()

@@ -1,5 +1,3 @@
-import { EventEntity } from 'src/event/entities/event.entity';
-import { TranslationEntity } from 'src/translation/entities/translation.entity';
 import {
   Column,
   Entity,
@@ -8,6 +6,8 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { EventEntity } from '../../event/entities/event.entity';
+import { TranslationEntity } from '../../translation/entities/translation.entity';
 
 @Entity('user')
 export class UserEntity {

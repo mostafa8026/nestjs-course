@@ -1,7 +1,5 @@
 import { OmitType, PartialType, PickType } from '@nestjs/mapped-types';
 import { IsDate, IsOptional, IsString } from 'class-validator';
-import { EventEntity } from 'src/event/entities/event.entity';
-import { UserEntity } from 'src/users/entities/user.entity';
 import {
   Column,
   CreateDateColumn,
@@ -10,6 +8,8 @@ import {
   OneToMany,
   PrimaryColumn,
 } from 'typeorm';
+import { EventEntity } from '../../event/entities/event.entity';
+import { UserEntity } from '../../users/entities/user.entity';
 
 export type Languages = 'en' | 'fa';
 @Entity('translation')

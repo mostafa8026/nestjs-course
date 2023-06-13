@@ -59,3 +59,10 @@ Don't forget to login to npm using:
 ```bash
 npm login
 ```
+
+You can ignore some files like src from publishing using .npmignore file:
+
+```
+src
+tsconfig.*.json
+```
