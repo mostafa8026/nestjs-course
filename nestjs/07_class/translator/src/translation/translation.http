@@ -1,0 +1,50 @@
+### get all
+GET http://localhost:3000/translation
+
+### get paginated
+GET  http://localhost:3000/translation/paginated?page=1&limit=10
+
+
+### post translation
+POST http://localhost:3000/translation
+Content-Type: application/json
+
+{
+    "phrase": "کتابها",
+    "translation": "books",
+    "fromLang": "fa",
+    "toLang": "en"
+}
+
+### put translation
+PUT http://localhost:3000/translation
+Content-Type: application/json
+
+{
+    "phrase": "کتاب",
+    "translation": "book",
+    "fromLang": "fa",
+    "toLang": "en",
+    "newField": "fff"
+}
+
+### POST translate
+POST http://localhost:3000/translation/translate
+Content-Type: application/json
+
+{
+  "sourceLang": "fa",
+  "targetLang": "en",
+  "phrase": "پترن راه راه"
+}
+
+### POST translate
+POST http://localhost:3000/translation/translate-by-api-key
+Content-Type: application/json
+x-open-ai-api-key: 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
+
+{
+  "sourceLang": "fa",
+  "targetLang": "en",
+  "phrase": "پترن راه راه"
+}
