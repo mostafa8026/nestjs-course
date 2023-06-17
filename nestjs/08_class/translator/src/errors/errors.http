@@ -1,0 +1,5 @@
+### GET all
+GET http://localhost:3000/errors
+
+### GET by id
+GET http://localhost:3000/errors/11
