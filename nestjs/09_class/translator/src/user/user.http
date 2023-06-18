@@ -1,0 +1,10 @@
+### POST user
+POST http://localhost:3000/user
+Content-Type: application/json
+
+{
+  "name": 5
+}
+
+### GET user
+GET http://localhost:3000/user

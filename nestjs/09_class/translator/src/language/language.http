@@ -1,0 +1,8 @@
+### POST language
+POST http://localhost:3000/language
+Content-Type: application/json
+
+{
+  "name": "farsi",
+  "shortName": "fa"
+}
