@@ -1,0 +1,1 @@
+export const PRIVATE_METADATA = 'PRIVATE';

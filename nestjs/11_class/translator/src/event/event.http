@@ -1,0 +1,11 @@
+### Like
+POST http://localhost:3000/event/like
+Content-Type: application/json
+
+{
+  "translationId": "dd5350b5825cb109dd2603b4791c233e",
+  "userId": 1
+}
+
+### GET all
+GET http://localhost:3000/event
